@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Square from './components/Square';
 
 function App() {
+  const [squares, setSquares] = useState(['', '', '', '', '', '', '', '', '']);
+  const [player, setPlayer] = useState(true);
+
+  const handleClick = () => {
+    setSquares(['', '', '', '', '', '', '', '', '']);
+    setPlayer(true);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='container'>
+        {squares.map((val, index) => {
+          return (
+            <Square
+              squares={squares}
+              setSquares={setSquares}
+              player={player}
+              setPlayer={setPlayer}
+              index={index}
+              squareValue={val}
+            />
+          )
+        })}
+      </div>
+      <button onClick={handleClick}>Rest</button>
     </div>
   );
 }
